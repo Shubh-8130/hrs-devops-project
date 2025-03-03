@@ -1,0 +1,10 @@
+variable "aws_region" {}
+variable "vpc_cidr" {}
+variable "subnet_cidr" {}
+variable "availability_zone" {}
+variable "cluster_name" {}
+variable "eks_role_name" {}
+variable "node_role_name" {}
+variable "desired_size" {}
+variable "min_size" {}
+variable "max_size" {}

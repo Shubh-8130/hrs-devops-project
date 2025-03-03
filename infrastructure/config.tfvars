@@ -1,0 +1,10 @@
+aws_region = "us-east-1"
+vpc_cidr = "10.0.0.0/16"
+subnet_cidr = "10.0.1.0/24"
+availability_zone = "us-east-1a"
+cluster_name = "app-cluster"
+eks_role_name = "eksClusterRole"
+node_role_name = "eksNodeRole"
+desired_size = 2
+min_size = 1
+max_size = 3
