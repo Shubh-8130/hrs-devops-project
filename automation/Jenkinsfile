@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_REGION = 'us-east-1'
+        ECR_REPO   = '123456789012.dkr.ecr.us-east-1.amazonaws.com/app-repo'
+        IMAGE_TAG  = "latest"
+        KUBE_CONFIG_PATH = "$HOME/.kube/config"
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Shubh-8130/CineVisionMicroserviceProject.git'
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                sh './mvnw clean package -DskipTests'  // For Maven-based projects
+                // sh './gradlew build'  // Uncomment for Gradle projects
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $ECR_REPO:$IMAGE_TAG .'
+            }
+        }
+
+        stage('Authenticate to AWS ECR') {
+            steps {
+                sh 'aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPO'
+            }
+        }
+
+        stage('Push Image to ECR') {
+            steps {
+                sh 'docker push $ECR_REPO:$IMAGE_TAG'
+            }
+        }
+
+        stage('Deploy to EKS') {
+            steps {
+                sh 'aws eks update-kubeconfig --name app-cluster --region $AWS_REGION'
+                sh 'kubectl apply -f k8s/deployment.yaml'
+                sh 'kubectl apply -f k8s/service.yaml'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Deployment Successful!"
+        }
+        failure {
+            echo "Deployment Failed. Check logs for details."
+        }
+    }
+}
