@@ -19,4 +19,5 @@ module "eks" {
   min_size       = var.min_size
   max_size       = var.max_size
   admin_iam_arns = var.admin_iam_arns
+  vpc_id         = module.network.vpc_id  # Pass the VPC ID
 }

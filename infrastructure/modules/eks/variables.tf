@@ -5,3 +5,4 @@ variable "subnet_ids" {}
 variable "desired_size" {}
 variable "min_size" {}
 variable "max_size" {}
+variable "vpc_id" {}
