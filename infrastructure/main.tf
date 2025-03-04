@@ -18,4 +18,5 @@ module "eks" {
   desired_size   = var.desired_size
   min_size       = var.min_size
   max_size       = var.max_size
+  admin_iam_arns = var.admin_iam_arns
 }

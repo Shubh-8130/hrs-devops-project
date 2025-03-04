@@ -8,3 +8,4 @@ node_role_name = "eksNodeRole"
 desired_size = 2
 min_size = 1
 max_size = 3
+admin_iam_arns = ["arn:aws:iam::123456789012:user/admin"]

@@ -8,3 +8,4 @@ variable "node_role_name" {}
 variable "desired_size" {}
 variable "min_size" {}
 variable "max_size" {}
+variable "admin_iam_arns" {}
