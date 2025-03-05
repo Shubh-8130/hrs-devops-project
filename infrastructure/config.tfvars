@@ -1,8 +1,22 @@
 aws_region = "us-east-1"
 vpc_cidr = "10.0.0.0/16"
-public_subnet_cidr = "10.0.1.0/24"
-private_subnet_cidr = "10.0.2.0/24"
-availability_zone = "us-east-1a"
+
+availability_zones = ["us-east-1a", "us-east-1b"]
+
+public_subnet_cidrs = [
+  "10.0.1.0/24",  # EKS Control Plane - Subnet 1
+  "10.0.2.0/24"   # EKS Control Plane - Subnet 2
+]
+
+private_subnet_cidrs = [
+  "10.0.3.0/24",  # EKS Node Group - Subnet 1
+  "10.0.4.0/24"   # EKS Node Group - Subnet 2
+]
+
+rds_private_subnet_cidrs = [
+  "10.0.5.0/24"  # RDS Private Subnet
+]
+
 cluster_name = "app-cluster"
 eks_role_name = "eksClusterRole"
 node_role_name = "eksNodeRole"
