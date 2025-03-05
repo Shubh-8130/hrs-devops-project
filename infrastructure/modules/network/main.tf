@@ -33,3 +33,24 @@ resource "aws_route_table_association" "public_assoc" {
 output "public_subnet_id" {
   value = aws_subnet.public_subnet.id
 }
+
+
+# Associate Private Subnets with Private Route Table
+resource "aws_route_table_association" "private" {
+  count          = length(var.private_subnet_ids)
+  subnet_id      = var.private_subnet_ids[count.index]
+  route_table_id = aws_route_table.private.id
+}
+
+# NAT Gateway to allow private subnets to access the internet
+resource "aws_nat_gateway" "nat" {
+  allocation_id = aws_eip.nat.id
+  subnet_id     = aws_subnet.public[0].id
+}
+
+# Route for NAT Gateway
+resource "aws_route" "private_nat" {
+  route_table_id         = aws_route_table.private.id
+  destination_cidr_block = "0.0.0.0/0"
+  nat_gateway_id         = aws_nat_gateway.nat.id
+}

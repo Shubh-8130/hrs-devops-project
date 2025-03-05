@@ -2,6 +2,10 @@ output "public_subnet_id" {
   value = module.network.public_subnet_id
 }
 
+output "private_subnet_id" {
+  value = module.network.private_subnet_id
+}
+
 output "eks_cluster_id" {
   value = module.eks.cluster_id
 }
@@ -17,4 +21,7 @@ output "eks_nodes_security_group_id" {
 
 output "vpc_id" {
   value = aws_vpc.main.id
+}
+output "rds_endpoint" {
+  value = module.rds.db_endpoint
 }

@@ -1,6 +1,7 @@
 aws_region = "us-east-1"
 vpc_cidr = "10.0.0.0/16"
-subnet_cidr = "10.0.1.0/24"
+public_subnet_cidr = "10.0.1.0/24"
+private_subnet_cidr = "10.0.2.0/24"
 availability_zone = "us-east-1a"
 cluster_name = "app-cluster"
 eks_role_name = "eksClusterRole"
@@ -9,3 +10,6 @@ desired_size = 2
 min_size = 1
 max_size = 3
 admin_iam_arns = ["arn:aws:iam::123456789012:user/admin"]
+db_name = "appdb"
+db_username = "admin"
+db_password = "securepassword"

@@ -1,6 +1,7 @@
 variable "aws_region" {}
 variable "vpc_cidr" {}
-variable "subnet_cidr" {}
+variable "public_subnet_cidr" {}
+variable "private_subnet_cidr" {}
 variable "availability_zone" {}
 variable "cluster_name" {}
 variable "eks_role_name" {}
@@ -9,3 +10,9 @@ variable "desired_size" {}
 variable "min_size" {}
 variable "max_size" {}
 variable "admin_iam_arns" {}
+variable "db_name" {}
+variable "db_username" {}
+variable "db_password" {}
+db_name = "appdb"
+db_username = "admin"
+db_password = "securepassword"
